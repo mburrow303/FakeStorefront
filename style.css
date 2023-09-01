@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+nav {
+  width: 100vw;
+}
+
+#display {
+  text-align:center;
+  margin-top: auto;
+}
+
+footer {
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  width: 90vw;
+  text-align: center;
+  margin: 10px;
+}
+
+footer p, a {
+  color:white;
+}
