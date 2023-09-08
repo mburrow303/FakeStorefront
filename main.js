@@ -20,13 +20,29 @@ async function fakeStore(endpoint) {
 const fakeStore = async(endpoint) => {
   let result = await fetch(apiURL + endpoint);
  let storeData = await result.json();
- console.log(storeData);
+ //console.log(storeData);
  displayCards(storeData);
 }
 
 function displayCards(storeData) {
  console.log(storeData);
 }
+
+//* Create new element(s)
+/*
+ 1. create the new empty element
+ 2. edit that new element
+  - adding text
+  - changing styling
+ 3. add the element to the webpage
+ */ 
+
+ //TODO STEP 1: Create the new element
+
+ //TODO STEP 2: Editing the element's properties
+
+ //TODO STEP 3: Adding elements to the webpage
+
 
 //? Was invoking function here but moved to window onload
 //fakeStore("cart"); //? empty array
@@ -64,7 +80,7 @@ womensNavbar.addEventListener('click', e => {
 
 //* onload method
 window.onload = (event) => {
-  //fakeStore("/cart"); //? empty array
+  fakeStore("/category/cart?sort=asc"); //? an empty array
   fakeStore("/category/electronics?sort=asc");
   fakeStore("/category/jewelery?sort=asc");
   fakeStore("/category/men's clothing?sort=asc");
