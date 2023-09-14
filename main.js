@@ -24,6 +24,8 @@ const fakeStore = async(endpoint) => {
  displayCards(storeData);
 }
 
+let cards = [];
+
 function displayCards(storeData) {
  console.log(storeData);
 }
@@ -80,10 +82,10 @@ womensNavbar.addEventListener('click', e => {
 
 //* onload method
 window.onload = (event) => {
-  fakeStore("/category/cart?sort=asc"); //? an empty array
-  fakeStore("/category/electronics?sort=asc");
-  fakeStore("/category/jewelery?sort=asc");
-  fakeStore("/category/men's clothing?sort=asc");
-  fakeStore("/category/women's clothing?sort=asc");
+  //fakeStore("/category/cart?sort=asc"); //? an empty array
+  //fakeStore("/category/electronics?sort=asc");
+  //fakeStore("/category/jewelery?sort=asc");
+  //fakeStore("/category/men's clothing?sort=asc");
+  //fakeStore("/category/women's clothing?sort=asc");
   fakeStore("?sort=asc"); //? all products in an array
  }
