@@ -4,6 +4,10 @@ const jewelryNavbar = document.getElementById('jewelry');
 const mensNavbar = document.getElementById('mens');
 const womensNavbar = document.getElementById('womens');
 const displayDiv = document.getElementById('display');
+const cart = [];
+//! Should it be - let cart = []; so we can add to it?
+
+
 
 const apiURL = "https://fakestoreapi.com/products";
 
@@ -18,13 +22,18 @@ const fakeStore = async(endpoint) => {
 function displayCards(storeData) {
  console.log(storeData);
  
- //cardContainer.innerHTML = '';
+ //!cardContainer.innerHTML = '';
 
- //cardImage.src = `${product.image}`;
- //cardTitle.innerText = `${product.title}`;
- //cardDescription.innerText = `${product.description}`;
- //cardPrice.innerText = `${product.price}`;
-
+ //* forEach loop - display each item on a card
+  storeData.forEach(item => {
+  cardImage.src = item.image;
+  cardTitle.innerText = item.title;
+  //accordionButton.innerText = item.description;
+  collapseOne.innerText = item.description;
+  //accordionButton2.innerText = item.price;
+  collapseTwo.innerText = item.price;
+  //!accordionButton2.innerText = `${item.price};
+ })
 }
 
 //? STEP 1: Create the new element(s)
@@ -47,8 +56,8 @@ function displayCards(storeData) {
   let priceBody = document.createElement('div');
   let addToCart = document.createElement('button');
 
-  let cards = [];
-  let cardContainer = document.createElement('div');
+  //! let cards = [];
+  //! let cardContainer = document.createElement('div');
 
   //? STEP 2: Editing the element's properties
   divrow.id = "divrow";
@@ -58,47 +67,54 @@ function displayCards(storeData) {
   card.id = "card";
   card.className = "card text-bg-secondary mb-3";
   card.style = "max-width: 18rem;"; 
-  cardImage.id = "cardImage";
+  cardImage.id = "card-image";
   cardImage.src = "...";
   cardImage.className = "card-img-top";
   cardImage.alt = "...image";
   cardImage.style.textAlign = "center";
-  cardBody.id = "cardBody";
+  cardBody.id = "card-body";
   cardBody.className = "card-body";
-  cardTitle.id = "cardTitle";
+  cardTitle.id = "card-title";
   cardTitle.className = "card-title";
   cardTitle.innerText = "Card Title";
   accordionExample.id = "accordionExample";
   accordionExample.className = "accordion";
-  accordionItem.id = "accordionItem";
+  accordionItem.id = "accordion-item";
   accordionItem.className = "accordion-item";
-  accordionHeader.id = "accordionHeader";
+  accordionHeader.id = "accordion-header";
   accordionHeader.className = "accordion-header";
-  accordionButton.id = "accordionButton";
+  accordionButton.id = "accordion-button";
   accordionButton.type = "button";
-  //accordionButton.className = "accordion-button";
+  //!accordionButton.className = "accordion-button";
   accordionButton.style.dataBsToggle = "collapse";
   accordionButton.style.dataBsTarget = "#collapseOne";
   accordionButton.style.ariaExpanded = "true";
-  accordionButton.style.ariaControls = "collapseOne"
-  accordionButton.innerText = "Item Description";
+  accordionButton.style.ariaControls = "collapseOne";
+  accordionButton.innerText = "Description";
   accordionButton.style.textAlign = "center";
   collapseOne.id = "collapseOne";
-  descriptionBody.id = "descriptionBody";
-  descriptionBody.innerText = "<strong>Description. This is the first item's accordion body.</strong> This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow."
-  accordionItem2.id = "accordionItem2";
-  accordionHeader2.id = "accordionHeader2";
-  accordionButton2.id = "accordionButton2";
+  descriptionBody.id = "description-body";
+  descriptionBody.className = "accordion-body";
+  //descriptionBody.innerText = "<strong>Description. This is the first item's accordion body.</strong> This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow."
+  accordionItem2.id = "accordion-item-2";
+  accordionItem2.className = "accordion-item";
+  accordionHeader2.id = "accordion-header2";
+  accordionHeader2.className = "accordion-header";
+  accordionButton2.id = "accordion-button-2";
   accordionButton2.type = "button";
-  //accordionButton2.className = "accordion-button";
+  //!accordionButton2.className = "accordion-button";
   accordionButton2.style.dataBsToggle = "collapse";
   accordionButton2.style.dataBsTarget = "#collapseTwo";
   accordionButton2.style.ariaExpanded = "true";
   accordionButton2.style.ariaControls = "collapseTwo";
-  accordionButton2.innerText = "Item Price $";
-  priceBody.id = "priceBody";
-  priceBody.innerText = "<strong>Price $X.00. This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow."
+  accordionButton2.innerText = "Price";
   collapseTwo.id = "collapseTwo";
+  collapseTwo.className = "accordion-collapse collapse";
+  collapseTwo.style.dataBsParent = "#acordionExample"
+  priceBody.id = "price-body";
+  priceBody.className = "accordion-body";
+  //priceBody.innerText = "<strong>Price $X.00. This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow."
+
   addToCart.id = "addToCart"
   addToCart.innerText = "Add to Cart";
 
@@ -123,15 +139,16 @@ function displayCards(storeData) {
   document.body.appendChild(priceBody);
   document.body.appendChild(addToCart);
 
+  //! append card to display div and make more than one card
 
- //* forEach loop - display each item on a card
- /*
- forEach(item) = {
+  
+function submitToCart(item) {
 
- }
- */ 
 
-//* event listeners for each global variable
+}
+
+
+  //* event listeners for each global variable
 cartNavbar.addEventListener('click', e => {
   e.preventDefault();
   fakeStore(`/category/cart`);
