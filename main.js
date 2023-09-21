@@ -5,7 +5,7 @@ const mensNavbar = document.getElementById('mens');
 const womensNavbar = document.getElementById('womens');
 const displayDiv = document.getElementById('display');
 const cart = [];
-//! Should it be - let cart = []; so we can add to it?
+//! Should it be - let cart = []; so we can change it later?
 
 
 
@@ -23,20 +23,12 @@ function displayCards(storeData) {
  console.log(storeData);
  
  //!cardContainer.innerHTML = '';
+ 
 
  //* forEach loop - display each item on a card
   storeData.forEach(item => {
-  cardImage.src = item.image;
-  cardTitle.innerText = item.title;
-  //accordionButton.innerText = item.description;
-  collapseOne.innerText = item.description;
-  //accordionButton2.innerText = item.price;
-  collapseTwo.innerText = item.price;
-  //!accordionButton2.innerText = `${item.price};
- })
-}
 
-//? STEP 1: Create the new element(s)
+  //? STEP 1: Create the new element(s)
   let divrow = document.createElement('div');
   let divcol = document.createElement('div');
   let card = document.createElement('div');
@@ -54,7 +46,7 @@ function displayCards(storeData) {
   let accordionButton2 = document.createElement('button');
   let collapseTwo = document.createElement('div');
   let priceBody = document.createElement('div');
-  let addToCart = document.createElement('button');
+  let addToCart = document.createElement('button');  
 
   //! let cards = [];
   //! let cardContainer = document.createElement('div');
@@ -86,10 +78,10 @@ function displayCards(storeData) {
   accordionButton.id = "accordion-button";
   accordionButton.type = "button";
   //!accordionButton.className = "accordion-button";
-  accordionButton.style.dataBsToggle = "collapse";
-  accordionButton.style.dataBsTarget = "#collapseOne";
-  accordionButton.style.ariaExpanded = "true";
-  accordionButton.style.ariaControls = "collapseOne";
+  accordionButton.dataBsToggle = "collapse";
+  accordionButton.dataBsTarget = "#collapseOne";
+  accordionButton.ariaExpanded = "true";
+  accordionButton.ariaControls = "collapseOne";
   accordionButton.innerText = "Description";
   accordionButton.style.textAlign = "center";
   collapseOne.id = "collapseOne";
@@ -98,7 +90,7 @@ function displayCards(storeData) {
   //descriptionBody.innerText = "<strong>Description. This is the first item's accordion body.</strong> This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow."
   accordionItem2.id = "accordion-item-2";
   accordionItem2.className = "accordion-item";
-  accordionHeader2.id = "accordion-header2";
+  accordionHeader2.id = "accordion-header-2";
   accordionHeader2.className = "accordion-header";
   accordionButton2.id = "accordion-button-2";
   accordionButton2.type = "button";
@@ -118,7 +110,6 @@ function displayCards(storeData) {
   addToCart.id = "addToCart"
   addToCart.innerText = "Add to Cart";
 
-  
   //? STEP 3: Adding elements to the webpage
   document.body.appendChild(divrow);
   document.body.appendChild(divcol);
@@ -140,15 +131,31 @@ function displayCards(storeData) {
   document.body.appendChild(addToCart);
 
   //! append card to display div and make more than one card
+  cardBody.appendChild(display);
+  //display.appendChild(cardBody);
 
-  
+  //* obtain data from API for each item to display
+  cardImage.src = item.image;
+  cardTitle.innerText = item.title;
+  //accordionButton.innerText = item.description;
+  collapseOne.innerText = item.description;
+  //descriptionBody.innerText = item.description;
+  //accordionButton2.innerText = item.price;
+  collapseTwo.innerText = item.price;
+
+ });
+
+}
+
 function submitToCart(item) {
-
+//! Need to be inside cardDisplay?
 
 }
 
 
   //* event listeners for each global variable
+
+//! incorporate Add to Cart functionality  
 cartNavbar.addEventListener('click', e => {
   e.preventDefault();
   fakeStore(`/category/cart`);
