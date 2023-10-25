@@ -10,17 +10,20 @@ const apiURL = "https://fakestoreapi.com/products";
 
 //* fakeStore() async function written as block body arrow function
 const fakeStore = async(endpoint) => {
-  let result = await fetch(apiURL + endpoint);
+ let result = await fetch(apiURL + endpoint);
  let storeData = await result.json();
  displayCards(storeData);
 }
 
-//! Currently displaying Cards correctly as 4 cards wide in each row *when* browser is a full screen. When I use the inspect feature on the browser then the cards only show 2 or 3 cards wide as the display is only on part of the screen. 
 function displayCards(storeData) {
  console.log(storeData);
 
  // TODO Call submitToCart function
  //? submitToCart();
+
+ while(display.firstChild) {
+  display.removeChild(display.firstChild);
+}
 
  //* forEach loop - display each item on a card
   storeData.forEach(item => {
@@ -70,7 +73,7 @@ function displayCards(storeData) {
   accordionButton.innerText = "Description";
   accordionButton.style.textAlign = "center";
   //collapseOne.id = "collapseOne";
-  collapseOne.className = "accordion-collapse collapse";
+  collapseOne.className = "accordion-collapse collapse show";
   collapseOne.setAttribute("data-bs-parent", "#accordionExample");
   //accordionBody.id = "accordion-body";
   accordionBody.className = "accordion-body";
@@ -80,11 +83,11 @@ function displayCards(storeData) {
   accordionHeader2.className = "accordion-header";
   //accordionButton2.id = "accordion-button-2";
   accordionButton2.type = "button";
-  accordionButton2.className = "accordion-button";
+  accordionButton2.className = "accordion-button collapsed";
   accordionButton2.setAttribute("data-bs-toggle",  "collapse"); 
-  accordionButton2.setAttribute("data-bs-target",  "#collapseOne");
-  accordionButton2.setAttribute("aria-expanded",  "true");
-  accordionButton2.setAttribute("aria-controls",  "collapseOne");
+  accordionButton2.setAttribute("data-bs-target",  "#collapseTwo");
+  accordionButton2.setAttribute("aria-expanded",  "false");
+  accordionButton2.setAttribute("aria-controls",  "collapseTwo");
   accordionButton2.innerText = "Price";
   accordionButton2.style.textAlign = "center";
   //collapseTwo.id = "collapseTwo";
@@ -118,9 +121,11 @@ function displayCards(storeData) {
 
 
   // TODO = Write some logic to deal with accordion button 1 & 2 opening and closing (collapsing)
-   //? Just want one card description to open when we click not all card descriptions
+   //? Just want one single card description to open when we click and not all card descriptions
 
-   //? Need accordionBody2 working correctly and showing the price when opened and only working on one card at a time 
+   //? Need accordionBody2 working correctly and showing the price when opened and only working on one single card at a time 
+
+   //? Interpolate prices to show the `$`
 
 
   //* obtain data from API for each item to display
@@ -128,27 +133,25 @@ function displayCards(storeData) {
   cardTitle.innerText = item.title;
   accordionBody.innerText = item.description;
   accordionBody2.innerText = item.price;
-  accordionButton2.innerText = item.price; //! Dont need this but with accordion button2 currently not showing its accordion body for some reason this shows the item price for now
+  //accordionButton2.innerText = item.price; //! Dont need this but with accordion button2 currently not showing its accordion body for some reason this shows the item price for now
  });
 }
 
 
-// TODO complete function
+// TODO complete function 
 //? Needs to be called inside cardDisplay
 function submitToCart(item) {
-
+ 
 }
 
 
 //* event listeners for each global variable
   
-// TODO incorporate view of Cart functionality  
+// TODO incorporate view of Cart functionality with a modal  
 cartNavbar.addEventListener('click', e => {
   e.preventDefault();
   fakeStore(`/category/cart`);
 })
-
-// TODO incorporate displaying only the specific category when clicked on navbar
 
 electronicsNavbar.addEventListener('click', e => {
   e.preventDefault();
@@ -179,3 +182,4 @@ window.onload = (event) => {
   //fakeStore("/category/women's clothing?sort=asc");
   fakeStore("?sort=asc"); //? all products in an array
  }
+ 
