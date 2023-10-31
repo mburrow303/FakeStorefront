@@ -4,7 +4,7 @@ const jewelryNavbar = document.getElementById('jewelry');
 const mensNavbar = document.getElementById('mens');
 const womensNavbar = document.getElementById('womens');
 const display = document.getElementById('display');
-const cart = [];
+let cart = [];
 
 const apiURL = "https://fakestoreapi.com/products";
 
@@ -18,14 +18,11 @@ const fakeStore = async(endpoint) => {
 function displayCards(storeData) {
  console.log(storeData);
 
- // TODO Call submitToCart function
- //? submitToCart();
-
  while(display.firstChild) {
   display.removeChild(display.firstChild);
-}
+ }
 
- //* forEach loop - display each item on a card
+  //* forEach loop - display each item on a card
   storeData.forEach(item => {
 
   //* STEP 1: Create the new element(s)
@@ -73,7 +70,9 @@ function displayCards(storeData) {
   accordionButton.innerText = "Description";
   accordionButton.style.textAlign = "center";
   //collapseOne.id = "collapseOne";
-  collapseOne.className = "accordion-collapse collapse show";
+  collapseOne.className = "accordion-collapse collapse";
+  //? line below shows accordion 1 as open
+  //? collapseOne.className = "accordion-collapse collapse show";
   collapseOne.setAttribute("data-bs-parent", "#accordionExample");
   //accordionBody.id = "accordion-body";
   accordionBody.className = "accordion-body";
@@ -92,6 +91,8 @@ function displayCards(storeData) {
   accordionButton2.style.textAlign = "center";
   //collapseTwo.id = "collapseTwo";
   collapseTwo.className = "accordion-collapse collapse";
+  //? line below shows accordion 2 as open
+  //? collapseTwo.className = "accordion-collapse collapse show";
   collapseTwo.setAttribute("data-bs-parent", "#accordionExample");
   //accordionBody2.id = "accordion-body-2";
   accordionBody2.className = "accordion-body";
@@ -119,31 +120,50 @@ function displayCards(storeData) {
   collapseTwo.appendChild(accordionBody2)
   card.appendChild(addToCart)
 
+   // TODO - accordion functioning
+   //? Get accordion to work correctly on cards
+   //? Write some logic to deal with accordion button 1 & 2 opening and closing (collapsing)?
 
-  // TODO = Write some logic to deal with accordion button 1 & 2 opening and closing (collapsing)
    //? Just want one single card description to open when we click and not all card descriptions
-
    //? Need accordionBody2 working correctly and showing the price when opened and only working on one single card at a time 
 
-   //? Interpolate prices to show the `$`
-
+  let price = item.price;
+  const formattedPrice = '$' + price.toFixed(2);
 
   //* obtain data from API for each item to display
   cardImage.src = item.image;
   cardTitle.innerText = item.title;
   accordionBody.innerText = item.description;
-  accordionBody2.innerText = item.price;
-  //accordionButton2.innerText = item.price; //! Dont need this but with accordion button2 currently not showing its accordion body for some reason this shows the item price for now
+  accordionBody2.innerText = formattedPrice;
+  //accordionBody2.innerText = item.price;
+  
+  addToCart.onclick = function() {
+    submitToCart(item);
+  }
  });
 }
 
-
-// TODO complete function 
-//? Needs to be called inside cardDisplay
 function submitToCart(item) {
- 
+  let price = item.price;
+  const formattedPrice = '$' + price.toFixed(2);
+  const index = cart.findIndex(cartItem => cartItem.id === item.id);
+  if (index !== -1) {
+    cart[index].quantity++;
+    console.log("Item Quantity Updated!:", cart);
+  } else {
+    cart.push({
+      id: item.id,
+      title: item.title,
+      cost: formattedPrice,
+      quantity: 1
+    });
+    console.log("Cart Updated!:", cart);
+  }
 }
 
+ // TODO - cart display & modal
+ //? Add in and figure tax in cart display
+ //? incorporate view of Cart functionality with a modal
 
 //* event listeners for each global variable
   
@@ -175,11 +195,10 @@ womensNavbar.addEventListener('click', e => {
 
 //* onload method
 window.onload = (event) => {
-  //fakeStore("/category/cart?sort=asc"); //? an empty array
+  fakeStore("?sort=asc"); //* all products in an array
+  //fakeStore("/category/cart?sort=asc"); // an empty array
   //fakeStore("/category/electronics?sort=asc");
   //fakeStore("/category/jewelery?sort=asc");
   //fakeStore("/category/men's clothing?sort=asc");
   //fakeStore("/category/women's clothing?sort=asc");
-  fakeStore("?sort=asc"); //? all products in an array
  }
- 
