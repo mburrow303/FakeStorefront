@@ -10,13 +10,13 @@ nav {
 }
 
 #display {
-  text-align:center;
+  text-align: center;
   margin-top: auto;
 }
 
 #card {
- margin: 1.0em;
- margin-left: 3.75em;
+  margin: 1em;
+  margin-left: 3.75em;
 }
 
 footer {
@@ -28,6 +28,7 @@ footer {
   margin: 10px;
 }
 
-footer p, a {
-  color:white;
+footer p,
+a {
+  color: white;
 }

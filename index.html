@@ -1,49 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link rel="stylesheet" href="./style.css">
-  <title>Fake Storefront</title>
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary"> 
-  
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">The Store</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a id="cart" class="nav-link" aria-current="page" href="#">Cart</a>
-          <a id="electronics" class="nav-link" href="#">Electronics</a>
-          <a id="jewelry" class="nav-link" href="#">Jewelry</a>
-          <a id="mens" class="nav-link" href="#">Men's Clothing</a>
-          <a id="womens" class="nav-link" href="#">Women's Clothing</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Fake Storefront</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">The Store</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <button
+              id="cart"
+              type="button"
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#cartModal"
+            >
+              Cart
+            </button>
+            <a id="electronics" class="nav-link" href="#">Electronics</a>
+            <a id="jewelry" class="nav-link" href="#">Jewelry</a>
+            <a id="mens" class="nav-link" href="#">Men's Clothing</a>
+            <a id="womens" class="nav-link" href="#">Women's Clothing</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div
+      class="modal fade"
+      id="cartModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="cartModalLabel">Your Cart</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <table id="itemTable" class="table">
+              <thead>
+                <tr>
+                  <th>Quantity</th>
+                  <th>Item</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Cart item rows will go here -->
+              </tbody>
+            </table>
+            <table id="expenseTable" class="table">
+              <tbody>
+                <tr>
+                  <td>Subtotal:</td>
+                  <td id="subtotal">$0.00</td>
+                </tr>
+                <tr>
+                  <td>Tax:</td>
+                  <td id="tax">$0.00</td>
+                </tr>
+                <tr>
+                  <td>Shipping:</td>
+                  <td id="shipping">$0.00</td>
+                </tr>
+                <tr>
+                  <td>Total:</td>
+                  <td id="total">$0.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" id="clearCart">
+              Clear Cart
+            </button>
+            <button type="button" class="btn btn-success" id="purchase">
+              Purchase for <span id="orderTotal">$0.00</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </nav>
 
-  <footer>
-    <p>Unit 4 Project ~ Upright Education Copyright &copy; 2023</p>
-  </footer> 
+    <footer>
+      <p>Unit 4 Project ~ Upright Education Copyright &copy; 2023</p>
+    </footer>
 
-  <!--Card Dislplay-->
+    <!--Card Dislplay-->
+    <div id="display" class="row row-cols-4 row-cols-md-2 g-4"></div>
 
-  <div id="display" class="row row-cols-4 row-cols-md-2 g-4">
-  
-  </div> 
-   
-  
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="./main.js"></script>
-
-</body>
+    <script src="./main.js"></script>
+  </body>
 </html>
